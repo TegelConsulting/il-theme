@@ -1,0 +1,7 @@
+footer {
+    grid-row-start: 3;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
