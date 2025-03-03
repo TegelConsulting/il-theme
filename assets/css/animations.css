@@ -1,0 +1,11 @@
+.fade-in {
+    & .box__title {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    & .box__ingress {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
