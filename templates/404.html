@@ -1,0 +1,23 @@
+<header>
+  <div class="site-header">
+    <h1><?php bloginfo('name'); ?></h1>
+    <p><?php bloginfo('description'); ?></p>
+  </div>
+</header>
+<main>
+  <div class="content-area">
+    <h2><?php esc_html_e('Page not found'); ?></h2>
+    <p>
+      <?php esc_html_e('Sorry, but the page you were trying to view does not exist.'); ?>
+    </p>
+  </div>
+</main>
+<footer>
+  <div class="site-footer">
+    <p>
+      &copy;
+      <?php echo date("Y"); ?>
+      IL-theme. All rights reserved.
+    </p>
+  </div>
+</footer>

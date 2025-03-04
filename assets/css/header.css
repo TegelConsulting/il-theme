@@ -3,6 +3,7 @@ header {
     top: 0;
     height: 150px;
     width: 100%;
+    z-index: 5;
 
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
@@ -29,21 +30,36 @@ header {
 header.scrolled {
     height: 75px;
     background: white;
+    align-items: center;
 
     & > nav {
         height: 40px;
 
         .menu {
-            height: 40px;
+            z-index: 5;
 
             span {
-                font-size: 1rem;
+                font-size: 2rem;
             }
 
             a:hover {
                 color: rgba(0, 0, 0, 0.35);
             }
         }
+
+        @media screen and (min-width: 768px) {
+            .menu {
+                height: 40px;
+
+                span {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    .center {
+        height: 35px;
     }
 }
 

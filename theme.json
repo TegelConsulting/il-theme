@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "name": "Primary",
+          "slug": "primary",
+          "color": "#0073aa"
+        },
+        {
+          "name": "Secondary",
+          "slug": "secondary",
+          "color": "#005177"
+        }
+      ]
+    },
+    "typography": {
+      "fontSizes": [
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "12px"
+        },
+        {
+          "name": "Medium",
+          "slug": "medium",
+          "size": "16px"
+        },
+        {
+          "name": "Large",
+          "slug": "large",
+          "size": "24px"
+        }
+      ]
+    },
+    "font": {
+      "family": "Libre Caslon Text, Arial, sans-serif",
+      "size": "16px",
+      "weight": "normal"
+    },
+    "border": {
+      "radius": "4px",
+      "width": "1px",
+      "style": "solid",
+      "color": "#cccccc"
+    },
+    "shadow": {
+      "radius": "4px",
+      "color": "rgba(0, 0, 0, 0.1)"
+    },
+    "spacing": {
+      "unit": "8px"
+    },
+    "transition": {
+      "duration": "0.3s",
+      "timing": "ease"
+    }
+  },
+  "templateParts": [
+    {
+      "area": "header",
+      "name": "header",
+      "title": "Header"
+    },
+    {
+      "area": "footer",
+      "name": "footer",
+      "title": "Footer"
+    },
+    {
+      "area": "header",
+      "name": "navigation",
+      "title": "Navigation"
+    }
+  ]
+}
