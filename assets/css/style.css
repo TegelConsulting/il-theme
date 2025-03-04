@@ -14,11 +14,15 @@ body {
     display: grid;
     place-items: center;
 
-    section {
+    p {
         display: grid;
         place-items: center;
         font-size: 1.5rem;
     }
+}
+
+.no-padding {
+    padding: 0;
 }
 
 .content {

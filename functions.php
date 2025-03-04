@@ -40,6 +40,42 @@ function il_theme_enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_scripts');
 
+function il_theme_enqueue_block_editor_assets() {
+    wp_enqueue_script(
+        'il-theme-hero-block',
+        get_template_directory_uri() . '/blocks/hero/index.js',
+        array('wp-blocks', 'wp-element', 'wp-editor'),
+        filemtime(get_template_directory() . '/blocks/hero/index.js')
+    );
+
+    // Localize the script with the hero image URL
+    wp_localize_script('il-theme-hero-block', 'ilThemeHeroBlock', array(
+        'heroImageUrl' => esc_url(get_theme_mod('il_theme_hero_image')),
+    ));
+
+    // Enqueue editor styles
+    wp_enqueue_style(
+        'il-theme-editor-style',
+        get_template_directory_uri() . '/assets/css/style.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/style.css')
+    );
+    wp_enqueue_style(
+        'il-theme-editor-header-style',
+        get_template_directory_uri() . '/assets/css/header.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/header.css')
+    );
+
+    wp_enqueue_style(
+        'il-theme-editor-posts-style',
+        get_template_directory_uri() . '/assets/css/posts.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/posts.css')
+    );
+}
+add_action('enqueue_block_editor_assets', 'il_theme_enqueue_block_editor_assets');
+
 function il_theme_customize_register($wp_customize)
 {
     $wp_customize->add_section('il_theme_images_section', array(
@@ -105,3 +141,26 @@ function il_theme_create_about_me_page() {
 add_action('after_switch_theme', 'il_theme_create_about_me_page');
 
 require_once get_template_directory() . '/inc/class-walker-nav-menu-spacer.php';
+
+function il_theme_register_custom_blocks() {
+    // Register the custom block
+    register_block_type(__DIR__ . '/blocks/hero', array(
+        'render_callback' => 'il_theme_render_hero_block',
+    ));
+}
+add_action('init', 'il_theme_register_custom_blocks');
+
+function il_theme_render_hero_block($attributes) {
+    $hero_image_url = esc_url(get_theme_mod('il_theme_hero_image'));
+    ob_start();
+    ?>
+    <div class="wp-block-cover alignfull no-padding">
+        <div class="wp-block-cover__inner-container">
+            <div class="hero box" style="background-image: url('<?php echo $hero_image_url; ?>');">
+                <p>Hej och välkommen till min blogg!</p>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}

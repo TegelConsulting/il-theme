@@ -1,0 +1,11 @@
+{
+    "apiVersion": 2,
+    "name": "il-theme/hero",
+    "title": "Hero",
+    "category": "design",
+    "icon": "cover-image",
+    "supports": {
+        "html": false
+    },
+    "editorScript": "file:./index.js"
+}
