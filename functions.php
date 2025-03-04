@@ -103,22 +103,3 @@ function il_theme_create_about_me_page() {
     }
 }
 add_action('after_switch_theme', 'il_theme_create_about_me_page');
-
-function il_theme_register_custom_blocks() {
-    // Register the custom block
-    register_block_type(__DIR__ . '/blocks/hero', array(
-        'render_callback' => 'il_theme_render_hero_block',
-    ));
-}
-add_action('init', 'il_theme_register_custom_blocks');
-
-function il_theme_render_hero_block($attributes) {
-    $hero_image_url = esc_url(get_theme_mod('il_theme_hero_image'));
-    ob_start();
-    ?>
-    <div class="hero box" style="background-image: url('<?php echo $hero_image_url; ?>');">
-        <section>Hej och välkommen till min blogg!</section>
-    </div>
-    <?php
-    return ob_get_clean();
-}
