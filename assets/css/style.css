@@ -51,9 +51,3 @@ body {
 .container {
     padding: 20px;
 }
-
-@media (min-width: 768px) {
-    .box {
-        /* min-height: 100dvh; */
-    }
-}

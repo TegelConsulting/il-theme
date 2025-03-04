@@ -103,3 +103,5 @@ function il_theme_create_about_me_page() {
     }
 }
 add_action('after_switch_theme', 'il_theme_create_about_me_page');
+
+require_once get_template_directory() . '/inc/class-walker-nav-menu-spacer.php';
