@@ -5,20 +5,22 @@
     <article class="wp-block-post post">
       <section class="post__header">
         <!-- wp:post-title {"isLink":true, "className": "post__title"} /-->
-        <!-- wp:post-date { "className": "post__date" } /-->
+        <!-- wp:post-date { "className": "date" } /-->
       </section>
       <!-- wp:post-content { "className": "post__text" } /-->
     </article>
 
     <!-- wp:comments -->
-    <div class="wp-block-comments">
-      <!-- wp:comments-title {"level":2} /-->
+    <div class="wp-block-comments comments">
+      <!-- wp:comments-title {"level":3} /-->
       <!-- wp:comment-template -->
-      <article class="wp-block-comment">
-        <!-- wp:comment-author-name /-->
+      <article class="wp-block-comment comment">
+        <section class="comment__header">
+          <!-- wp:comment-author-name /-->
+          <!-- wp:comment-date {"className":"date"} /-->
+        </section>
         <!-- wp:comment-content /-->
-        <!-- wp:comment-date /-->
-        <!-- wp:comment-reply-link /-->
+        <!-- wp:comment-reply-link {"className": "wp-block-button"} /-->
       </article>
       <!-- /wp:comment-template -->
       <!-- wp:comment-form /-->
