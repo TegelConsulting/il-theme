@@ -7,7 +7,10 @@ function il_theme_setup()
     // Add support for featured images
     add_theme_support('post-thumbnails');
 
+    add_theme_support('comments');
+
     // Register navigation menus
+    add_theme_support('menus');
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'il-theme'),
     ));

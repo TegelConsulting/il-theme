@@ -1,4 +1,5 @@
 footer {
+    height: 100px;
     grid-row-start: 3;
 
     display: grid;

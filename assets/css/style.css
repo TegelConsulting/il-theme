@@ -23,20 +23,19 @@ body {
 
 .content {
     width: 100%;
-    height: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     /* overflow-y: auto;
     scroll-snap-type: y mandatory; */
-
-    .top-margin {
-        margin-top: 150px;
-    }
 }
 
 .box {
-    height: 100dvh;
+    /* min-height: 100dvh; */
     /* scroll-snap-align: start; */
-    display: grid;
-    place-items: center;
+    /* display: grid;
+    place-items: center; */
+    flex: 1;
 
     .post {
         opacity: 0;
@@ -45,21 +44,16 @@ body {
     }
 }
 
+.top-margin {
+    margin-top: 150px;
+}
+
 .container {
     padding: 20px;
 }
 
-/* @media (min-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
+@media (min-width: 768px) {
+    .box {
+        /* min-height: 100dvh; */
     }
-
-    nav {
-        flex-direction: column;
-    }
-
-    nav a {
-        margin: 10px 0;
-    }
-} */
+}

@@ -10,6 +10,10 @@ header {
 
     transition: all 0.3s ease;
 
+    .site-title {
+        font-size: 2rem;
+    }
+
     .center {
         display: flex;
         align-items: center;
@@ -56,6 +60,10 @@ header.scrolled {
                 }
             }
         }
+    }
+
+    .site-title {
+        font-size: 1rem;
     }
 
     .center {
