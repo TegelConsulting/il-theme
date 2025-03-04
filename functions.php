@@ -104,6 +104,23 @@ function il_theme_customize_register($wp_customize)
         'section' => 'il_theme_images_section',
         'settings' => 'il_theme_blog_logo',
     )));
+
+    $wp_customize->add_section('il_theme_hero_section', array(
+        'title' => __('Hero content', 'il-theme'),
+        'priority' => 40,
+    ));
+
+    $wp_customize->add_setting('il_theme_hero_content', array(
+        'default' => '',
+        'sanitize_callback' => '',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'il_theme_hero_content', array(
+        'label' => __('Hero Content', 'il-theme'),
+        'section' => 'il_theme_hero_section',
+        'settings' => 'il_theme_hero_content',
+        'type' => 'textarea'
+    )));
 }
 
 add_action('customize_register', 'il_theme_customize_register');
@@ -152,12 +169,13 @@ add_action('init', 'il_theme_register_custom_blocks');
 
 function il_theme_render_hero_block($attributes) {
     $hero_image_url = esc_url(get_theme_mod('il_theme_hero_image'));
+    $hero_image_content = get_theme_mod('il_theme_hero_content');
     ob_start();
     ?>
     <div class="wp-block-cover alignfull no-padding">
         <div class="wp-block-cover__inner-container">
             <div class="hero box" style="background-image: url('<?php echo $hero_image_url; ?>');">
-                <p>Hej och välkommen till min blogg!</p>
+                <p><?php echo $hero_image_content ?></p>
             </div>
         </div>
     </div>
