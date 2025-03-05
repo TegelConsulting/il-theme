@@ -23,6 +23,7 @@ body {
 
 .no-padding {
     padding: 0;
+    width: 100%;
 }
 
 .content {
@@ -30,16 +31,13 @@ body {
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    /* overflow-y: auto;
-    scroll-snap-type: y mandatory; */
+    align-items: center;
 }
 
 .box {
-    /* min-height: 100dvh; */
-    /* scroll-snap-align: start; */
-    /* display: grid;
-    place-items: center; */
     flex: 1;
+    display: grid;
+    place-items: center;
 
     .post {
         opacity: 0;

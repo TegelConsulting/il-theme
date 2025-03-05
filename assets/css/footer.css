@@ -1,8 +1,19 @@
 footer {
-    height: 100px;
-    grid-row-start: 3;
+    margin-top: 6rem;
+    border-top: 1px solid grey;
+    /* height: 250px; */
+    width: 100%;
 
     display: grid;
-    align-items: center;
-    justify-content: center;
+    grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+
+    @media screen and (min-width: 768px) {
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+footer > * {
+    padding: 2rem;
 }

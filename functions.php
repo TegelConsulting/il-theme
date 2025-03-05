@@ -26,6 +26,7 @@ function il_theme_enqueue_styles()
     wp_enqueue_style('il-theme-footer-style', get_template_directory_uri() . '/assets/css/footer.css');
     wp_enqueue_style('il-theme-animations-style', get_template_directory_uri() . '/assets/css/animations.css');
     wp_enqueue_style('il-theme-posts-style', get_template_directory_uri() . '/assets/css/posts.css');
+    wp_enqueue_style('il-theme-page-style', get_template_directory_uri() . '/assets/css/page.css');
     wp_enqueue_style('il-theme-font-1', 'https://fonts.googleapis.com');
     wp_enqueue_style('il-theme-font-2', 'https://fonts.gstatic.com');
     wp_enqueue_style('il-theme-font-3', 'https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
