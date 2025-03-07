@@ -183,3 +183,116 @@ function il_theme_render_hero_block($attributes) {
     <?php
     return ob_get_clean();
 }
+
+function il_theme_add_custom_meta_boxes() {
+    add_meta_box(
+        'il_theme_coverimage_meta_box',
+        __('Cover Image', 'il-theme'),
+        'il_theme_coverimage_meta_box_callback',
+        'post',
+        'side'
+    );
+
+    add_meta_box(
+        'il_theme_highlight_meta_box',
+        __('Highlight', 'il-theme'),
+        'il_theme_highlight_meta_box_callback',
+        'post',
+        'side'
+    );
+}
+add_action('add_meta_boxes', 'il_theme_add_custom_meta_boxes');
+
+function il_theme_coverimage_meta_box_callback($post) {
+    wp_nonce_field('il_theme_save_coverimage_meta_box_data', 'il_theme_coverimage_meta_box_nonce');
+    $coverimage = get_post_meta($post->ID, '_il_theme_coverimage', true);
+    echo '<input type="hidden" id="il_theme_coverimage" name="il_theme_coverimage" value="' . esc_attr($coverimage) . '">';
+    echo '<input type="button" id="il_theme_coverimage_button" class="button" value="' . __('Select Cover Image', 'il-theme') . '">';
+    echo '<div id="il_theme_coverimage_preview" style="margin-top: 10px;">';
+    if ($coverimage) {
+        echo '<img src="' . esc_url($coverimage) . '" style="max-width: 100%;">';
+    }
+    echo '</div>';
+}
+
+function il_theme_highlight_meta_box_callback($post) {
+    wp_nonce_field('il_theme_save_highlight_meta_box_data', 'il_theme_highlight_meta_box_nonce');
+    $highlight = get_post_meta($post->ID, '_il_theme_highlight', true);
+    echo '<label for="il_theme_highlight">';
+    echo '<input type="checkbox" id="il_theme_highlight" name="il_theme_highlight" value="1"' . checked($highlight, '1', false) . '>';
+    echo __('Highlight this post', 'il-theme');
+    echo '</label>';
+}
+
+function il_theme_save_custom_meta_box_data($post_id) {
+    if (!isset($_POST['il_theme_coverimage_meta_box_nonce']) || !wp_verify_nonce($_POST['il_theme_coverimage_meta_box_nonce'], 'il_theme_save_coverimage_meta_box_data')) {
+        return;
+    }
+
+    if (!isset($_POST['il_theme_highlight_meta_box_nonce']) || !wp_verify_nonce($_POST['il_theme_highlight_meta_box_nonce'], 'il_theme_save_highlight_meta_box_data')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['il_theme_coverimage'])) {
+        $coverimage = sanitize_text_field($_POST['il_theme_coverimage']);
+        update_post_meta($post_id, '_il_theme_coverimage', $coverimage);
+    }
+
+    $highlight = isset($_POST['il_theme_highlight']) ? '1' : '';
+    update_post_meta($post_id, '_il_theme_highlight', $highlight);
+}
+add_action('save_post', 'il_theme_save_custom_meta_box_data');
+
+function il_theme_enqueue_admin_scripts($hook) {
+    if ($hook !== 'post.php' && $hook !== 'post-new.php') {
+        return;
+    }
+
+    wp_enqueue_media();
+    wp_enqueue_script('il-theme-admin-script', get_template_directory_uri() . '/assets/js/admin.js', array('jquery'), null, true);
+}
+add_action('admin_enqueue_scripts', 'il_theme_enqueue_admin_scripts');
+
+function il_theme_register_coverimage_block() {
+    register_block_type(__DIR__ . '/blocks/coverimage', array(
+        'render_callback' => 'il_theme_render_coverimage_block',
+    ));
+}
+add_action('init', 'il_theme_register_coverimage_block');
+
+function il_theme_render_coverimage_block($attributes, $content) {
+    $post_id = get_the_ID();
+    $coverImageUrl = get_post_meta($post_id, '_il_theme_coverimage', true);
+
+    ob_start();
+    if ($coverImageUrl) {
+        echo '<div class="coverimage"><img src="' . esc_url($coverImageUrl) . '" alt="' . get_the_title() . '"></div>';
+    }
+    return ob_get_clean();
+}
+
+function il_theme_register_highlight_blocks() {
+    register_block_type(__DIR__ . '/blocks/highlight', array(
+        'render_callback' => 'il_theme_render_highlight_block',
+    ));
+}
+add_action('init', 'il_theme_register_highlight_blocks');
+
+function il_theme_render_highlight_block($attributes) {
+    $post_id = get_the_ID();
+    $highlight = get_post_meta($post_id, '_il_theme_highlight', true);
+
+    ob_start();
+    if ($highlight) {
+        echo '<div class="highlight"><p>This post is highlighted!</p></div>';
+    }
+    return ob_get_clean();
+}

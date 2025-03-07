@@ -1,0 +1,11 @@
+{
+  "apiVersion": 2,
+  "name": "il-theme/highlight",
+  "title": "Highlight",
+  "category": "widgets",
+  "icon": "admin-post",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js"
+}

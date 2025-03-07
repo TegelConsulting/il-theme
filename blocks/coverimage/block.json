@@ -1,0 +1,11 @@
+{
+  "apiVersion": 2,
+  "name": "il-theme/coverimage",
+  "title": "Cover Image",
+  "category": "widgets",
+  "icon": "format-image",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js"
+}
