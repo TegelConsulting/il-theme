@@ -274,7 +274,9 @@ function il_theme_render_coverimage_block($attributes, $content) {
 
     ob_start();
     if ($coverImageUrl) {
-        echo '<div class="coverimage"><img src="' . esc_url($coverImageUrl) . '" alt="' . get_the_title() . '"></div>';
+        echo '<div class="coverimage" style="background-image: url(' . esc_url($coverImageUrl) . ')">
+            <h2 class="post__title wp-block-post-title">' . get_the_title() . '</h2>
+        </div>';
     }
     return ob_get_clean();
 }
