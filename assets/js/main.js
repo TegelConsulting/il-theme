@@ -24,7 +24,7 @@ window.onload = function () {
     });
   }, options);
 
-  const boxes = document.getElementsByClassName("box");
+  const boxes = document.querySelectorAll(".box:not(.no-fade)");
 
   if (boxes) {
     for (let i = 0; i < boxes.length; i++) {

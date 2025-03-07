@@ -1,4 +1,3 @@
-// filepath: /C:/MAMP/htdocs/wordpress/wp-content/themes/IL-theme/blocks/coverimage/index.js
 (function (blocks, element, blockEditor) {
   var el = element.createElement;
   var MediaUpload = blockEditor.MediaUpload;

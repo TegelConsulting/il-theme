@@ -46,6 +46,15 @@ body {
     }
 }
 
+.no-fade {
+    opacity: 1;
+
+    .post {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 .top-margin {
     margin-top: 150px;
 }
