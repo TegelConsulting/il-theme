@@ -27,6 +27,7 @@ function il_theme_enqueue_styles()
     wp_enqueue_style('il-theme-animations-style', get_template_directory_uri() . '/assets/css/animations.css');
     wp_enqueue_style('il-theme-posts-style', get_template_directory_uri() . '/assets/css/posts.css');
     wp_enqueue_style('il-theme-page-style', get_template_directory_uri() . '/assets/css/page.css');
+    wp_enqueue_style('il-theme-carousel-style', get_template_directory_uri() . '/assets/css/carousel.css');
     wp_enqueue_style('il-theme-font-1', 'https://fonts.googleapis.com');
     wp_enqueue_style('il-theme-font-2', 'https://fonts.gstatic.com');
     wp_enqueue_style('il-theme-font-3', 'https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
@@ -40,6 +41,14 @@ function il_theme_enqueue_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_scripts');
+
+function il_theme_enqueue_carousel_assets() {
+    wp_enqueue_style('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css');
+    wp_enqueue_style('owl-carousel-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css');
+    wp_enqueue_script('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), null, true);
+    wp_enqueue_script('il-theme-carousel', get_template_directory_uri() . '/assets/js/carousel.js', array('jquery', 'owl-carousel'), null, true);
+}
+add_action('wp_enqueue_scripts', 'il_theme_enqueue_carousel_assets');
 
 function il_theme_enqueue_block_editor_assets() {
     wp_enqueue_script(
@@ -165,6 +174,18 @@ function il_theme_register_custom_blocks() {
     register_block_type(__DIR__ . '/blocks/hero', array(
         'render_callback' => 'il_theme_render_hero_block',
     ));
+
+    register_block_type(__DIR__ . '/blocks/coverimage', array(
+        'render_callback' => 'il_theme_render_coverimage_block',
+    ));
+
+    register_block_type(__DIR__ . '/blocks/highlight', array(
+        'render_callback' => 'il_theme_render_highlight_block',
+    ));
+
+    register_block_type(__DIR__ . '/blocks/carousel', array(
+        'render_callback' => 'il_theme_render_carousel_block',
+    ));
 }
 add_action('init', 'il_theme_register_custom_blocks');
 
@@ -261,13 +282,6 @@ function il_theme_enqueue_admin_scripts($hook) {
 }
 add_action('admin_enqueue_scripts', 'il_theme_enqueue_admin_scripts');
 
-function il_theme_register_coverimage_block() {
-    register_block_type(__DIR__ . '/blocks/coverimage', array(
-        'render_callback' => 'il_theme_render_coverimage_block',
-    ));
-}
-add_action('init', 'il_theme_register_coverimage_block');
-
 function il_theme_render_coverimage_block($attributes, $content) {
     $post_id = get_the_ID();
     $coverImageUrl = get_post_meta($post_id, '_il_theme_coverimage', true);
@@ -281,13 +295,6 @@ function il_theme_render_coverimage_block($attributes, $content) {
     return ob_get_clean();
 }
 
-function il_theme_register_highlight_blocks() {
-    register_block_type(__DIR__ . '/blocks/highlight', array(
-        'render_callback' => 'il_theme_render_highlight_block',
-    ));
-}
-add_action('init', 'il_theme_register_highlight_blocks');
-
 function il_theme_render_highlight_block($attributes) {
     $post_id = get_the_ID();
     $highlight = get_post_meta($post_id, '_il_theme_highlight', true);
@@ -295,6 +302,43 @@ function il_theme_render_highlight_block($attributes) {
     ob_start();
     if ($highlight) {
         echo '<div class="highlight"><p>This post is highlighted!</p></div>';
+    }
+    return ob_get_clean();
+}
+
+function il_theme_render_carousel_block($attributes) {
+    $query = new WP_Query(array(
+        'posts_per_page' => 5,
+        'post_status' => 'publish'
+    ));
+
+    ob_start();
+    if ($query->have_posts()) {
+        echo '<div class="carousel owl-carousel">';
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post_id = get_the_ID();
+            $coverImageUrl = get_post_meta($post_id, '_il_theme_coverimage', true);
+            $post_title = get_the_title();
+            $post_link = get_permalink();
+
+            echo '<div class="carousel-item item">';
+            if ($coverImageUrl) {
+                echo '<div class="carousel-content">
+                    <div class="carousel-image" style="background-image: url(' . esc_url($coverImageUrl) . ');">    
+                        <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                    </div>
+                </div>';
+            }
+            else {
+                echo '<div class="carousel-content">
+                        <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                    </div>';
+            }
+            echo '</div>';
+        }
+        echo '</div>';
+        wp_reset_postdata();
     }
     return ob_get_clean();
 }
