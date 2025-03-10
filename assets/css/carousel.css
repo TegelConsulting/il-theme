@@ -48,24 +48,27 @@
 .owl-next {
     position: absolute;
     top: 50%;
+    opacity: 0;
     transition: all 0.2s;
 }
 
 .owl-prev {
-    transform: rotate(-90deg) translateY(-200%);
+    transform: rotate(-90deg) translateY(-30px);
 }
 
 .owl-next {
     right: 0;
-    transform: rotate(90deg) translateY(-200%);
+    transform: rotate(90deg) translateY(-5px);
 }
 
 .owl-prev.show {
+    opacity: 1;
     transform: rotate(-90deg) translateY(-15px);
 }
 
 .owl-next.show {
-    transform: rotate(90deg);
+    opacity: 1;
+    transform: rotate(90deg) translateY(10px);
 }
 
 .owl-nav .prev-slide {
