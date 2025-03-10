@@ -486,5 +486,4 @@ function il_theme_custom_post_date_format($block_content, $block) {
 
     return $block_content;
 }
-
 add_filter('render_block', 'il_theme_custom_post_date_format', 10, 2);

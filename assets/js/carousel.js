@@ -11,19 +11,33 @@ jQuery(document).ready(function ($) {
     ],
   });
 
-  document.getElementById("carousel").addEventListener("mouseover", () => {
-    const btns = document.querySelectorAll(".owl-nav button");
+  let hideButtonsTimeout;
 
+  function showButtons() {
+    const btns = document.querySelectorAll(".owl-nav button");
     btns.forEach((btn) => {
       btn.classList.add("show");
     });
-  });
 
-  document.getElementById("carousel").addEventListener("mouseleave", () => {
+    // Clear any existing timeout
+    clearTimeout(hideButtonsTimeout);
+
+    // Set a timeout to hide the buttons after 2 seconds
+    hideButtonsTimeout = setTimeout(() => {
+      hideButtons();
+    }, 1000);
+  }
+
+  function hideButtons() {
     const btns = document.querySelectorAll(".owl-nav button");
-
     btns.forEach((btn) => {
       btn.classList.remove("show");
     });
-  });
+  }
+
+  document.addEventListener("mousemove", showButtons);
+
+  document
+    .querySelector(".owl-stage-outer")
+    .addEventListener("mouseleave", hideButtons);
 });

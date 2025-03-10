@@ -2,6 +2,11 @@
     width: 100%;
     height: 100dvh;
     /* overflow-x: hidden; */
+    z-index: 1;
+
+    /* & .owl-stage-outer {
+        z-index: 2;
+    } */
 }
 
 .carousel-item {
@@ -14,6 +19,8 @@
     width: 100%;
     height: 100vh;
     text-align: center;
+    position: relative; /* Ensure positioning context for child elements */
+    z-index: 1; /* Ensure the content is above the navigation buttons */
 }
 
 .carousel-content h3 {
@@ -37,38 +44,69 @@
     place-items: center;
 }
 
+.owl-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Ensure the buttons are above the content */
+    pointer-events: none; /* Allow clicks to pass through */
+
+    display: grid;
+    align-items: center;
+}
+
 .owl-nav .nav-btn {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 10px;
     cursor: pointer;
+    pointer-events: auto; /* Make the buttons clickable */
 }
 
 .owl-prev,
 .owl-next {
     position: absolute;
-    top: 50%;
-    opacity: 0;
     transition: all 0.2s;
+
+    @media screen and (min-width: 768px) {
+        opacity: 0;
+    }
 }
 
 .owl-prev {
-    transform: rotate(-90deg) translateY(-30px);
+    transform: rotate(-90deg);
+    left: -15px;
+
+    @media screen and (min-width: 768px) {
+        left: -30px;
+        transform: rotate(-90deg);
+    }
 }
 
 .owl-next {
-    right: 0;
-    transform: rotate(90deg) translateY(-5px);
+    right: 10px;
+    transform: rotate(90deg);
+
+    @media screen and (min-width: 768px) {
+        right: 0;
+        transform: rotate(90deg);
+    }
 }
 
 .owl-prev.show {
-    opacity: 1;
-    transform: rotate(-90deg) translateY(-15px);
+    @media screen and (min-width: 768px) {
+        opacity: 1;
+        left: -15px;
+    }
 }
 
 .owl-next.show {
-    opacity: 1;
-    transform: rotate(90deg) translateY(10px);
+    @media screen and (min-width: 768px) {
+        opacity: 1;
+        right: 10px;
+    }
 }
 
 .owl-nav .prev-slide {
@@ -83,6 +121,7 @@
     display: flex; /* Ensure the dots are displayed in a row */
     justify-content: center;
     gap: 13px; /* Add some space between the dots */
+    z-index: 2; /* Ensure the dots are above the content */
 
     & .owl-dot {
         width: 7px;
