@@ -72,9 +72,24 @@
     position: relative;
 }
 
-.owl-dots {
+#carousel .owl-dots {
     position: absolute;
     bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
+    display: flex; /* Ensure the dots are displayed in a row */
+    justify-content: center;
+    gap: 13px; /* Add some space between the dots */
+
+    & .owl-dot {
+        width: 7px;
+        height: 7px;
+        background: grey;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    & .owl-dot.active {
+        background: black;
+    }
 }
