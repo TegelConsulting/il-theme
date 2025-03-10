@@ -2,13 +2,16 @@ jQuery(document).ready(function ($) {
   $(".carousel").owlCarousel({
     items: 1,
     loop: true,
-    autoplay: false,
+    autoplay: true,
     dots: true,
     nav: true,
     navText: [
       "<div class='nav-btn prev-slide'>Föregående</div>",
       "<div class='nav-btn next-slide'>Nästa</div>",
     ],
+    slideTransition: "ease-in",
+    navSpeed: 400,
+    autoplaySpeed: 400,
   });
 
   let hideButtonsTimeout;

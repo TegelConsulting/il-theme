@@ -142,6 +142,7 @@ nav {
         transform: translateX(-100%);
         gap: 2rem;
         margin: 0;
+        width: 100%;
 
         li {
             list-style: none;
@@ -199,6 +200,7 @@ nav {
             margin: 0;
             gap: 1rem;
             transform: none;
+            width: auto;
 
             .spacer {
                 display: block;
