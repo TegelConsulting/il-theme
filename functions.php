@@ -28,6 +28,7 @@ function il_theme_enqueue_styles()
     wp_enqueue_style('il-theme-posts-style', get_template_directory_uri() . '/assets/css/posts.css');
     wp_enqueue_style('il-theme-page-style', get_template_directory_uri() . '/assets/css/page.css');
     wp_enqueue_style('il-theme-carousel-style', get_template_directory_uri() . '/assets/css/carousel.css');
+    wp_enqueue_style('il-theme-highlights-style', get_template_directory_uri() . '/assets/css/highlights.css');
     wp_enqueue_style('il-theme-font-1', 'https://fonts.googleapis.com');
     wp_enqueue_style('il-theme-font-2', 'https://fonts.gstatic.com');
     wp_enqueue_style('il-theme-font-3', 'https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
@@ -186,6 +187,10 @@ function il_theme_register_custom_blocks() {
     register_block_type(__DIR__ . '/blocks/carousel', array(
         'render_callback' => 'il_theme_render_carousel_block',
     ));
+
+    register_block_type(__DIR__ . '/blocks/highlights', array(
+        'render_callback' => 'il_theme_render_highlights_block',
+    ));
 }
 add_action('init', 'il_theme_register_custom_blocks');
 
@@ -342,3 +347,144 @@ function il_theme_render_carousel_block($attributes) {
     }
     return ob_get_clean();
 }
+
+function il_theme_render_highlights_block($attributes) {
+    $query = new WP_Query(array(
+        'posts_per_page' => 10,
+        'post_status' => 'publish',
+        'meta_query' => array(
+            array(
+                'key' => '_il_theme_highlight',
+                'value' => '1',
+                'compare' => '='
+            )
+        ),
+    ));
+
+    ob_start();
+    $post_count = $query->found_posts;
+    $grid_style = 'display: grid; grid-template-columns: repeat(3, 1fr);';
+    if ($post_count == 4) {
+        $grid_style = 'display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);';
+    } elseif ($post_count == 5) {
+        $grid_style = 'display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr);';
+    }
+
+    if ($query->have_posts()) {
+        echo '<div class="highlights" style="' . $grid_style . '">';
+        $post_index = 0;
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post_id = get_the_ID();
+            $coverImageUrl = get_post_meta($post_id, '_il_theme_coverimage', true);
+            $post_title = get_the_title();
+            $post_link = get_permalink();
+
+            $item_style = '';
+            if ($post_count == 5 && $post_index == 2) {
+                $item_style = 'grid-column: 1 / 2; grid-row: 2 / 3;';
+            }
+            if ($post_count == 5 && $post_index == 3) {
+                $item_style = 'grid-column: 2 / 3; grid-row: 2 / 3;';
+            }
+            if ($post_count == 5 && $post_index == 4) {
+                $item_style = 'grid-column: 3 / 5; grid-row: 1 / span 2; height: calc(300px * 2 + 0.5rem);';
+            }
+
+            if ($coverImageUrl) {
+                echo '<div class="item" style="' . $item_style . '">
+                    <div class="item__background" style="background-image: url(' . esc_url($coverImageUrl) . ');">    
+                        <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                    </div>
+                </div>';
+            }
+            else {
+                echo '<div class="item">
+                        <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                    </div>';
+            }
+            $post_index++;
+        }
+        echo '</div>';
+        wp_reset_postdata();
+    }
+    else {
+        echo '<div>No posts found</div>';
+    }
+    return ob_get_clean();
+}
+
+function il_theme_load_more_posts() {
+    $date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
+
+    $query_args = array(
+        'posts_per_page' => 5,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+
+    if ($date) {
+        $query_args['date_query'] = array(
+            array(
+                'before' => $date,
+                'inclusive' => false,
+            ),
+        );
+    }
+
+    $query = new WP_Query($query_args);
+
+    $posts = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $posts[] = array(
+                'id' => get_the_ID(),
+                'title' => get_the_title(),
+                'link' => get_permalink(),
+                'excerpt' => get_the_excerpt(),
+                'content' => get_the_content(),
+                'date' => get_the_date(), // ISO 8601 format
+                'class' => join(' ', get_post_class())
+            );
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json(array(
+        'posts' => $posts,
+        'hasMore' => $query->max_num_pages > $query->get('paged')
+    ));
+}
+
+add_action('rest_api_init', function() {
+    register_rest_route('il-theme/v1', '/load-more-posts', array(
+        'methods' => 'GET',
+        'callback' => 'il_theme_load_more_posts'
+     ));
+});
+
+function il_theme_custom_post_date_format($block_content, $block) {
+    if ($block['blockName'] === 'core/post-date') {
+        // Load the post date in the desired format
+        $post_date = get_the_date('Y-m-d H:i:s');
+        $formatted_date = get_the_date('F j, Y');
+
+        // Use DOMDocument to modify the block content
+        $dom = new DOMDocument();
+        @$dom->loadHTML(mb_convert_encoding($block_content, 'HTML-ENTITIES', 'UTF-8'));
+        $time_element = $dom->getElementsByTagName('time')->item(0);
+
+        if ($time_element) {
+            $time_element->setAttribute('datetime', $post_date);
+            $time_element->nodeValue = $formatted_date;
+        }
+
+        $block_content = $dom->saveHTML($time_element->parentNode);
+    }
+
+    return $block_content;
+}
+
+add_filter('render_block', 'il_theme_custom_post_date_format', 10, 2);
