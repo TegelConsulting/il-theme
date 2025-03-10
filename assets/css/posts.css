@@ -7,6 +7,7 @@
   padding: 20px;
   border-bottom: #333 1px solid;
   margin: 10px;
+  justify-self: stretch;
 
   .post__header {
     display: flex;
@@ -65,4 +66,9 @@
 
   display: grid;
   place-items: center;
+
+  & h2.post__title {
+    color: white;
+    mix-blend-mode: difference;
+  }
 }

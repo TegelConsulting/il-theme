@@ -413,3 +413,78 @@ function il_theme_render_highlights_block($attributes) {
     }
     return ob_get_clean();
 }
+
+function il_theme_load_more_posts() {
+    $date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
+
+    $query_args = array(
+        'posts_per_page' => 5,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+
+    if ($date) {
+        $query_args['date_query'] = array(
+            array(
+                'before' => $date,
+                'inclusive' => false,
+            ),
+        );
+    }
+
+    $query = new WP_Query($query_args);
+
+    $posts = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $posts[] = array(
+                'id' => get_the_ID(),
+                'title' => get_the_title(),
+                'link' => get_permalink(),
+                'excerpt' => get_the_excerpt(),
+                'content' => get_the_content(),
+                'date' => get_the_date(), // ISO 8601 format
+                'class' => join(' ', get_post_class())
+            );
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json(array(
+        'posts' => $posts,
+        'hasMore' => $query->max_num_pages > $query->get('paged')
+    ));
+}
+
+add_action('rest_api_init', function() {
+    register_rest_route('il-theme/v1', '/load-more-posts', array(
+        'methods' => 'GET',
+        'callback' => 'il_theme_load_more_posts'
+     ));
+});
+
+function il_theme_custom_post_date_format($block_content, $block) {
+    if ($block['blockName'] === 'core/post-date') {
+        // Load the post date in the desired format
+        $post_date = get_the_date('Y-m-d H:i:s');
+        $formatted_date = get_the_date('F j, Y');
+
+        // Use DOMDocument to modify the block content
+        $dom = new DOMDocument();
+        @$dom->loadHTML(mb_convert_encoding($block_content, 'HTML-ENTITIES', 'UTF-8'));
+        $time_element = $dom->getElementsByTagName('time')->item(0);
+
+        if ($time_element) {
+            $time_element->setAttribute('datetime', $post_date);
+            $time_element->nodeValue = $formatted_date;
+        }
+
+        $block_content = $dom->saveHTML($time_element->parentNode);
+    }
+
+    return $block_content;
+}
+
+add_filter('render_block', 'il_theme_custom_post_date_format', 10, 2);

@@ -7,7 +7,7 @@ window.addEventListener("scroll", function () {
   }
 });
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   const options = {
     root: null,
     rootMargin: "0px",
@@ -40,4 +40,59 @@ window.onload = function () {
     nav.classList.toggle("open");
     burger.classList.toggle("open");
   });
-};
+
+  const loadMoreTrigger = document.getElementById("load-more-trigger");
+
+  const loadObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        loadMorePosts();
+      }
+    },
+    {
+      rootMargin: "0px",
+      threshold: 1.0,
+    }
+  );
+
+  loadObserver.observe(loadMoreTrigger);
+
+  function loadMorePosts() {
+    let lastPostDate = document
+      .querySelector(".wp-block-post:last-child .date time")
+      .getAttribute("datetime");
+
+    console.log(lastPostDate);
+
+    loadObserver.unobserve(loadMoreTrigger);
+
+    fetch(`/wordpress/wp-json/il-theme/v1/load-more-posts?date=${lastPostDate}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const postList = document.getElementById("posts");
+        data.posts.forEach((post) => {
+          const article = document.createElement("article");
+          article.id = `post-${post.id}`;
+          article.className = post.class;
+          article.innerHTML = `
+            <section class="post__header">
+              <h2 class='post__title wp-block-post-title'><a href="${post.link}">${post.title}</a></h2>
+              <div class='date wp-block-post-date'>
+                <time datetime='${post.date}'>${post.date}</time>
+              </div>  
+            </section>
+            <div class='entry-content post__text wp-block-post-content is-layout-flow wp-block-post-content-is-layout-flow'>
+              <p>${post.content}</p></div>
+          `;
+          postList.appendChild(article);
+        });
+
+        if (data.hasMore) {
+          lastPostDate = document
+            .querySelector(".wp-block-post:last-child .post__date time")
+            .getAttribute("datetime");
+          loadObserver.observe(loadMoreTrigger);
+        }
+      });
+  }
+});

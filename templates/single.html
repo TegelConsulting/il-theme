@@ -3,32 +3,34 @@
 
   <!-- wp:il-theme/coverimage /-->
 
-  <div class="box no-fade top-margin">
+  <div id="posts" class="box no-fade top-margin">
     <article class="wp-block-post post">
       <section class="post__header">
         <!-- wp:post-title {"isLink":true, "className": "post__title"} /-->
         <!-- wp:post-date { "className": "date" } /-->
       </section>
       <!-- wp:post-content { "className": "post__text" } /-->
-    </article>
 
-    <!-- wp:comments -->
-    <div class="wp-block-comments comments">
-      <!-- wp:comments-title {"level":3} /-->
-      <!-- wp:comment-template -->
-      <article class="wp-block-comment comment">
-        <section class="comment__header">
-          <!-- wp:comment-author-name /-->
-          <!-- wp:comment-date {"className":"date"} /-->
-        </section>
-        <!-- wp:comment-content /-->
-        <!-- wp:comment-reply-link {"className": "wp-block-button"} /-->
-      </article>
-      <!-- /wp:comment-template -->
-      <!-- wp:comment-form /-->
-    </div>
-    <!-- /wp:comments -->
+      <!-- wp:comments -->
+      <div class="wp-block-comments comments">
+        <!-- wp:comments-title {"level":3} /-->
+        <!-- wp:comment-template -->
+        <article class="wp-block-comment comment">
+          <section class="comment__header">
+            <!-- wp:comment-author-name /-->
+            <!-- wp:comment-date {"className":"date"} /-->
+          </section>
+          <!-- wp:comment-content /-->
+          <!-- wp:comment-reply-link {"className": "wp-block-button"} /-->
+        </article>
+        <!-- /wp:comment-template -->
+        <!-- wp:comment-form /-->
+      </div>
+      <!-- /wp:comments -->
+    </article>
   </div>
+
+  <div id="load-more-trigger"></div>
 
   <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
 </div>
