@@ -314,7 +314,7 @@ function il_theme_render_carousel_block($attributes) {
 
     ob_start();
     if ($query->have_posts()) {
-        echo '<div class="carousel owl-carousel">';
+        echo '<div id="carousel" class="carousel owl-carousel">';
         while ($query->have_posts()) {
             $query->the_post();
             $post_id = get_the_ID();
