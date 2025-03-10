@@ -1,0 +1,11 @@
+{
+  "apiVersion": 2,
+  "name": "il-theme/highlights",
+  "title": "Highlights",
+  "category": "widgets",
+  "icon": "images",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js"
+}
