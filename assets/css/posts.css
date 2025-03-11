@@ -1,3 +1,7 @@
+#posts {
+  width: 75%;
+}
+
 .posts {
   max-width: 75%;
   padding-top: 10rem;
@@ -70,5 +74,6 @@
   & h2.post__title {
     color: white;
     mix-blend-mode: difference;
+    font-size: 2.5rem;
   }
 }

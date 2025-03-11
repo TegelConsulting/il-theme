@@ -404,7 +404,7 @@ function il_theme_load_more_posts() {
     $date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 
     $query_args = array(
-        'posts_per_page' => 5,
+        'posts_per_page' => 1,
         'post_status' => 'publish',
         'orderby' => 'date',
         'order' => 'DESC',
@@ -431,7 +431,7 @@ function il_theme_load_more_posts() {
                 'link' => get_permalink(),
                 'excerpt' => get_the_excerpt(),
                 'content' => get_the_content(),
-                'date' => get_the_date(), // ISO 8601 format
+                'date' => get_the_date('c'), // ISO 8601 format
                 'class' => join(' ', get_post_class())
             );
         }

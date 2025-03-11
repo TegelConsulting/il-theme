@@ -46,13 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadObserver = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
+        console.log("Get more posts");
+
         loadMorePosts();
       }
     },
     {
       rootMargin: "0px",
       threshold: 1.0,
-    }
+    },
   );
 
   loadObserver.observe(loadMoreTrigger);
@@ -61,8 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastPostDate = document
       .querySelector(".wp-block-post:last-child .date time")
       .getAttribute("datetime");
-
-    console.log(lastPostDate);
 
     loadObserver.unobserve(loadMoreTrigger);
 
@@ -73,12 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
         data.posts.forEach((post) => {
           const article = document.createElement("article");
           article.id = `post-${post.id}`;
-          article.className = post.class;
+          article.className = post.class + " wp-block-post";
+
+          const date = new Date(post.date);
+          const formattedDate = date
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+          const displayDate = new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }).format(date);
+
           article.innerHTML = `
             <section class="post__header">
               <h2 class='post__title wp-block-post-title'><a href="${post.link}">${post.title}</a></h2>
               <div class='date wp-block-post-date'>
-                <time datetime='${post.date}'>${post.date}</time>
+                <time datetime='${formattedDate}'>${displayDate}</time>
               </div>  
             </section>
             <div class='entry-content post__text wp-block-post-content is-layout-flow wp-block-post-content-is-layout-flow'>
@@ -89,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data.hasMore) {
           lastPostDate = document
-            .querySelector(".wp-block-post:last-child .post__date time")
+            .querySelector(".wp-block-post:last-child .date time")
             .getAttribute("datetime");
           loadObserver.observe(loadMoreTrigger);
         }
