@@ -1,7 +1,9 @@
 .highlights {
   margin-top: 10rem;
   width: 100%;
-  gap: 0.5rem;
+  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
   & .item {
     width: 100%;
@@ -24,5 +26,19 @@
       text-decoration: none;
       mix-blend-mode: difference;
     }
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 75%;
+  }
+}
+
+.highlights.even-posts {
+  /* Styles for even number of posts */
+}
+
+.highlights.odd-posts {
+  & .item:last-child {
+    grid-column: 1 / -1;
   }
 }

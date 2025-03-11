@@ -363,16 +363,16 @@ function il_theme_render_highlights_block($attributes) {
 
     ob_start();
     $post_count = $query->found_posts;
-    $grid_style = 'display: grid; grid-template-columns: repeat(3, 1fr);';
-    if ($post_count == 4) {
-        $grid_style = 'display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);';
-    } elseif ($post_count == 5) {
-        $grid_style = 'display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr);';
+    $container_class = 'highlights';
+
+    if ($post_count % 2 == 0) {
+        $container_class .= ' even-posts';
+    } else {
+        $container_class .= ' odd-posts';
     }
 
     if ($query->have_posts()) {
-        echo '<div class="highlights" style="' . $grid_style . '">';
-        $post_index = 0;
+        echo '<div class="' . $container_class . '">';
         while ($query->have_posts()) {
             $query->the_post();
             $post_id = get_the_ID();
@@ -380,35 +380,21 @@ function il_theme_render_highlights_block($attributes) {
             $post_title = get_the_title();
             $post_link = get_permalink();
 
-            $item_style = '';
-            if ($post_count == 5 && $post_index == 2) {
-                $item_style = 'grid-column: 1 / 2; grid-row: 2 / 3;';
-            }
-            if ($post_count == 5 && $post_index == 3) {
-                $item_style = 'grid-column: 2 / 3; grid-row: 2 / 3;';
-            }
-            if ($post_count == 5 && $post_index == 4) {
-                $item_style = 'grid-column: 3 / 5; grid-row: 1 / span 2; height: calc(300px * 2 + 0.5rem);';
-            }
-
+            echo '<div class="item">';
             if ($coverImageUrl) {
-                echo '<div class="item" style="' . $item_style . '">
-                    <div class="item__background" style="background-image: url(' . esc_url($coverImageUrl) . ');">    
+                echo '<div class="item__background" style="background-image: url(' . esc_url($coverImageUrl) . ');">    
                         <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
-                    </div>
-                </div>';
-            }
-            else {
-                echo '<div class="item">
+                    </div>';
+            } else {
+                echo '<div class="item__background">
                         <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
                     </div>';
             }
-            $post_index++;
+            echo '</div>';
         }
         echo '</div>';
         wp_reset_postdata();
-    }
-    else {
+    } else {
         echo '<div>No posts found</div>';
     }
     return ob_get_clean();
