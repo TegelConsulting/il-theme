@@ -1,6 +1,6 @@
 (function (blocks, element) {
   var el = element.createElement;
-  blocks.registerBlockType("il-theme/highlights", {
+  blocks.registerBlockType("iltheme/highlights", {
     edit: function () {
       return el("p", {}, "Custom Fields Block");
     },

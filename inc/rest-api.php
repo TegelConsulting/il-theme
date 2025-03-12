@@ -52,7 +52,7 @@ function il_theme_load_more_posts() {
 }
 
 add_action('rest_api_init', function() {
-    register_rest_route('il-theme/v1', '/load-more-posts', array(
+    register_rest_route('iltheme/v1', '/load-more-posts', array(
         'methods' => 'GET',
         'callback' => 'il_theme_load_more_posts'
      ));

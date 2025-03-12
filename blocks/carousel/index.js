@@ -2,7 +2,7 @@
   var el = element.createElement;
   var useBlockProps = blockEditor.useBlockProps;
 
-  blocks.registerBlockType("il-theme/carousel", {
+  blocks.registerBlockType("iltheme/carousel", {
     edit: function (props) {
       var blockProps = useBlockProps();
       return el(

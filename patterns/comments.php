@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Comments
- * Slug: themeslug/comments
+ * Slug: iltheme/comments
  * Description: Comments area with comments list, pagination, and comment form.
  * Categories: text
  * Block Types: core/comments

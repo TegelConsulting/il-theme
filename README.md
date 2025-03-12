@@ -1,7 +1,7 @@
-# IL-theme
+# iltheme
 
 ## Description
-IL-theme is a WordPress theme designed for personal websites. It features a modern and responsive layout with a transparent header that transforms upon scrolling. The theme includes a large hero image on the landing page, providing an engaging first impression.
+iltheme is a WordPress theme designed for personal websites. It features a modern and responsive layout with a transparent header that transforms upon scrolling. The theme includes a large hero image on the landing page, providing an engaging first impression.
 
 ## Features
 - Transparent header that shrinks on scroll
@@ -11,11 +11,11 @@ IL-theme is a WordPress theme designed for personal websites. It features a mode
 - Simple and clean footer
 
 ## Installation
-1. Download the IL-theme folder.
+1. Download the iltheme folder.
 2. Upload the folder to the `/wp-content/themes/` directory of your WordPress installation.
 3. Go to the WordPress admin dashboard.
 4. Navigate to Appearance > Themes.
-5. Activate the IL-theme.
+5. Activate the iltheme.
 
 ## Usage
 - Customize the logo by replacing `assets/images/logo.png` with your own logo image.

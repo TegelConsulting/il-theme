@@ -5,7 +5,7 @@
   var InspectorControls = blockEditor.InspectorControls;
   var Button = wp.components.Button;
 
-  blocks.registerBlockType("il-theme/coverimage", {
+  blocks.registerBlockType("iltheme/coverimage", {
     edit: function (props) {
       var coverImageUrl = props.attributes.coverImageUrl;
 

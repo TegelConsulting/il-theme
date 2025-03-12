@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     fetch(
-      `/wordpress/wp-json/il-theme/v1/load-more-posts?date=${lastPostDate}&${catQuery}`,
+      `/wordpress/wp-json/iltheme/v1/load-more-posts?date=${lastPostDate}&${catQuery}`,
     )
       .then((response) => response.json())
       .then((data) => {

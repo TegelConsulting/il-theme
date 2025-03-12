@@ -2,7 +2,7 @@
   var el = element.createElement;
   var useBlockProps = blockEditor.useBlockProps;
 
-  blocks.registerBlockType("il-theme/hero", {
+  blocks.registerBlockType("iltheme/hero", {
     edit: function (props) {
       var blockProps = useBlockProps();
       return el(

@@ -1,4 +1,4 @@
-// filepath: /C:/MAMP/htdocs/wordpress/wp-content/themes/IL-theme/assets/js/admin.js
+// filepath: /C:/MAMP/htdocs/wordpress/wp-content/themes/iltheme/assets/js/admin.js
 jQuery(document).ready(function ($) {
   var file_frame;
 

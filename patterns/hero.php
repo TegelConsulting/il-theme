@@ -5,4 +5,4 @@
  * Categories: featured
  */
 ?>
-<!-- wp:il-theme/hero /-->
+<!-- wp:iltheme/hero /-->

@@ -1,9 +1,9 @@
 <?php
-// filepath: c:\MAMP\htdocs\wordpress\wp-content\themes\IL-theme\inc\customizer.php
+// filepath: c:\MAMP\htdocs\wordpress\wp-content\themes\iltheme\inc\customizer.php
 
 function il_theme_customize_register($wp_customize) {
     $wp_customize->add_section('il_theme_images_section', array(
-        'title' => __('Theme pictures', 'il-theme'),
+        'title' => __('Theme pictures', 'iltheme'),
         'priority' => 30,
     ));
 
@@ -13,7 +13,7 @@ function il_theme_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'il_theme_hero_image', array(
-        'label' => __('Hero Image', 'il-theme'),
+        'label' => __('Hero Image', 'iltheme'),
         'section' => 'il_theme_images_section',
         'settings' => 'il_theme_hero_image',
     )));
@@ -24,13 +24,13 @@ function il_theme_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'il_theme_blog_logo', array(
-        'label' => __('Blog logo', 'il-theme'),
+        'label' => __('Blog logo', 'iltheme'),
         'section' => 'il_theme_images_section',
         'settings' => 'il_theme_blog_logo',
     )));
 
     $wp_customize->add_section('il_theme_hero_section', array(
-        'title' => __('Hero content', 'il-theme'),
+        'title' => __('Hero content', 'iltheme'),
         'priority' => 40,
     ));
 
@@ -40,7 +40,7 @@ function il_theme_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'il_theme_hero_content', array(
-        'label' => __('Hero Content', 'il-theme'),
+        'label' => __('Hero Content', 'iltheme'),
         'section' => 'il_theme_hero_section',
         'settings' => 'il_theme_hero_content',
         'type' => 'textarea'

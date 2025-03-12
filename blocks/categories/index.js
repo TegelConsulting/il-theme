@@ -2,7 +2,7 @@
   var el = element.createElement;
   var useBlockProps = blockEditor.useBlockProps;
 
-  blocks.registerBlockType("il-theme/categories", {
+  blocks.registerBlockType("iltheme/categories", {
     edit: function (props) {
       var blockProps = useBlockProps();
       return el("div", blockProps, "List of categories here");

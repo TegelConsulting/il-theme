@@ -63,11 +63,11 @@ function il_theme_custom_post_date_format($block_content, $block) {
 add_filter('render_block', 'il_theme_custom_post_date_format', 10, 2);
 
 function il_theme_category_slug_shortcode() {
-    wp_enqueue_script('il-theme-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true);
+    wp_enqueue_script('iltheme-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true);
 
     if (is_category()) {
         $category = get_queried_object();
-        wp_localize_script('il-theme-main', 'ilThemeData', array(
+        wp_localize_script('iltheme-main', 'ilThemeData', array(
             'categoryId' => $category->term_id,
         ));
     }
