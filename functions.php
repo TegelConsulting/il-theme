@@ -407,13 +407,11 @@ function il_theme_render_highlights_block($attributes) {
 function il_theme_render_hero_video_block($attributes) {
     ob_start();
     ?>
-    
-            <div class="video box">
-                <video autoplay loop muted>
-                    <source src="http://localhost/wordpress/wp-content/uploads/2025/03/IMG_6475.mov" type="video/mp4">
-                </video>
-            </div>
-        
+        <div class="video box">
+            <video autoplay loop muted>
+                <source src="http://localhost/wordpress/wp-content/uploads/2025/03/IMG_6475.mov" type="video/mp4">
+            </video>
+        </div>  
     <?php
     return ob_get_clean();
 }
