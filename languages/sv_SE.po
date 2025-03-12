@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-12 19:59+0100\n"
+"POT-Creation-Date: 2025-03-12 20:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,6 +13,14 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: assets/js/carousel.js:13
+msgid "Previous"
+msgstr "Föregående"
+
+#: assets/js/carousel.js:14
+msgid "Next"
+msgstr "Nästa"
 
 #: inc/customizer.php:6
 msgid "Theme pictures"

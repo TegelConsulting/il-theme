@@ -32,10 +32,12 @@ function il_theme_enqueue_category_media() {
 add_action('admin_enqueue_scripts', 'il_theme_enqueue_category_media');
 
 function il_theme_enqueue_carousel_assets() {
+    wp_enqueue_script('wp-i18n');
     wp_enqueue_style('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css');
     wp_enqueue_style('owl-carousel-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css');
     wp_enqueue_script('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), null, true);
-    wp_enqueue_script('iltheme-carousel', get_template_directory_uri() . '/assets/js/carousel.js', array('jquery', 'owl-carousel'), null, true);
+    wp_enqueue_script('iltheme-carousel', get_template_directory_uri() . '/assets/js/carousel.js', array('jquery', 'owl-carousel','wp-i18n'), null, true);
+    wp_set_script_translations('carousel', 'iltheme', get_template_directory() . '/languages');
 }
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_carousel_assets');
 

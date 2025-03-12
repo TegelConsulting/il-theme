@@ -1,4 +1,13 @@
 jQuery(document).ready(function ($) {
+  const { __, setLocaleData } = wp.i18n;
+
+  // Debugging: Check if wp.i18n is loaded
+  console.log("wp.i18n loaded:", typeof __ === "function");
+
+  // Debugging: Check if translations are available
+  console.log('Translation for "Previous":', __("Previous", "iltheme"));
+  console.log('Translation for "Next":', __("Next", "iltheme"));
+
   const carousel = $(".carousel");
 
   if (carousel.length > 0) {
@@ -9,8 +18,8 @@ jQuery(document).ready(function ($) {
       dots: true,
       nav: true,
       navText: [
-        "<div class='nav-btn prev-slide'>Föregående</div>",
-        "<div class='nav-btn next-slide'>Nästa</div>",
+        `<div class='nav-btn prev-slide'>${__("Previous", "iltheme")}</div>`,
+        `<div class='nav-btn next-slide'>${__("Next", "iltheme")}</div>`,
       ],
       slideTransition: "ease-in",
       navSpeed: 400,
