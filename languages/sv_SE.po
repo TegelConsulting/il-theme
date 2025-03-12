@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-12 20:24+0100\n"
+"POT-Creation-Date: 2025-03-12 20:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,11 +14,11 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: assets/js/carousel.js:13
+#: assets/js/carousel.js:8 assets/js/carousel.js:21
 msgid "Previous"
 msgstr "Föregående"
 
-#: assets/js/carousel.js:14
+#: assets/js/carousel.js:9 assets/js/carousel.js:22
 msgid "Next"
 msgstr "Nästa"
 

@@ -18,8 +18,8 @@ jQuery(document).ready(function ($) {
       dots: true,
       nav: true,
       navText: [
-        `<div class='nav-btn prev-slide'>${__("Previous", "iltheme")}</div>`,
-        `<div class='nav-btn next-slide'>${__("Next", "iltheme")}</div>`,
+        `<div class='nav-btn prev-slide'>${__("Föregående", "iltheme")}</div>`,
+        `<div class='nav-btn next-slide'>${__("Nästa", "iltheme")}</div>`,
       ],
       slideTransition: "ease-in",
       navSpeed: 400,
