@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Highlights
- * Slug: themeslug/highlights
+ * Slug: iltheme/highlights
  * Categories: featured
  */
 ?>

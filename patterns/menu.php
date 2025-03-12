@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Menu
- * Slug: themeslug/menu
+ * Slug: iltheme/menu
  * Categories: featured
  */
 ?>

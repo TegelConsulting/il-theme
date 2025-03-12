@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Hero Video
- * Slug: themeslug/hero-video
+ * Slug: iltheme/hero-video
  * Categories: featured
  */
 ?>

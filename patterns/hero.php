@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Hero
- * Slug: themeslug/hero
+ * Slug: iltheme/hero
  * Categories: featured
  */
 ?>

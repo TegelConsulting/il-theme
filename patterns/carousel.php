@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Carousel
- * Slug: themeslug/carousel
+ * Slug: iltheme/carousel
  * Categories: featured
  */
 ?>
