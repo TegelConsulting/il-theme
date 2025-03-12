@@ -1,0 +1,11 @@
+{
+  "apiVersion": 2,
+  "name": "il-theme/categories",
+  "title": "Categories",
+  "category": "widgets",
+  "icon": "images",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js"
+}

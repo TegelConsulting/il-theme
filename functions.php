@@ -29,19 +29,26 @@ function il_theme_enqueue_styles()
     wp_enqueue_style('il-theme-page-style', get_template_directory_uri() . '/assets/css/page.css');
     wp_enqueue_style('il-theme-carousel-style', get_template_directory_uri() . '/assets/css/carousel.css');
     wp_enqueue_style('il-theme-highlights-style', get_template_directory_uri() . '/assets/css/highlights.css');
+    wp_enqueue_style('il-theme-categories-style', get_template_directory_uri() . '/assets/css/categories.css');
     wp_enqueue_style('il-theme-font-1', 'https://fonts.googleapis.com');
     wp_enqueue_style('il-theme-font-2', 'https://fonts.gstatic.com');
     wp_enqueue_style('il-theme-font-3', 'https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
 }
-
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_styles');
 
 function il_theme_enqueue_scripts()
 {
     wp_enqueue_script('il-theme-main-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true);
 }
-
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_scripts');
+
+function il_theme_enqueue_category_media() {
+    if (isset($_GET['taxonomy']) && $_GET['taxonomy'] === 'category') {
+        wp_enqueue_media();
+        wp_enqueue_script('il-theme-category-media', get_template_directory_uri() . '/assets/js/category-media.js', array('jquery'), null, true);
+    }
+}
+add_action('admin_enqueue_scripts', 'il_theme_enqueue_category_media');
 
 function il_theme_enqueue_carousel_assets() {
     wp_enqueue_style('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css');
@@ -194,6 +201,10 @@ function il_theme_register_custom_blocks() {
 
     register_block_type(__DIR__ . '/blocks/herovideo', array(
         'render_callback' => 'il_theme_render_hero_video_block',
+    ));
+
+    register_block_type(__DIR__ . '/blocks/categories', array(
+        'render_callback' => 'il_theme_render_categories_block',
     ));
 }
 add_action('init', 'il_theme_register_custom_blocks');
@@ -416,6 +427,28 @@ function il_theme_render_hero_video_block($attributes) {
     return ob_get_clean();
 }
 
+function il_theme_render_categories_block($attributes) {
+    // Get all categories except the "Uncategorized" category
+    $categories = get_categories(array(
+        'exclude' => 1 // Exclude the "Uncategorized" category (ID 1)
+    ));
+
+    ob_start();
+    if (!empty($categories)) {
+        echo '<div class="categories">';
+        foreach ($categories as $category) {
+            $image_url = get_term_meta($category->term_id, 'category_image', true);
+            echo '<div class="category" style="background-image: url(' . $image_url . '">';
+                echo '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>';
+            echo '</div>';
+        }
+        echo '</div>';
+    } else {
+        echo '<div class="categories">No categories found</div>';
+    }
+    return ob_get_clean();
+}
+
 function il_theme_load_more_posts() {
     $date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 
@@ -489,3 +522,60 @@ function il_theme_custom_post_date_format($block_content, $block) {
     return $block_content;
 }
 add_filter('render_block', 'il_theme_custom_post_date_format', 10, 2);
+
+// Add a custom field to the category edit screen
+function il_theme_add_category_image_field($term) {
+    $image_url = get_term_meta($term->term_id, 'category_image', true);
+    ?>
+    <tr class="form-field">
+        <th scope="row" valign="top">
+            <label for="category_image"><?php _e('Category Image', 'il-theme'); ?></label>
+        </th>
+        <td>
+            <input type="hidden" name="category_image" id="category_image" value="<?php echo esc_attr($image_url); ?>" />
+            <div id="category_image_preview" style="margin-bottom: 10px;">
+                <?php if ($image_url) : ?>
+                    <img src="<?php echo esc_url($image_url); ?>" style="max-width: 100%;" />
+                <?php endif; ?>
+            </div>
+            <input type="button" class="button" id="category_image_button" value="<?php _e('Upload/Add Image', 'il-theme'); ?>" />
+            <input type="button" class="button" id="category_image_remove_button" value="<?php _e('Remove Image', 'il-theme'); ?>" />
+            <p class="description"><?php _e('Upload or add an image for this category.', 'il-theme'); ?></p>
+        </td>
+    </tr>
+    <script>
+        jQuery(document).ready(function($) {
+            $('#category_image_button').click(function(e) {
+                e.preventDefault();
+                var image = wp.media({
+                    title: '<?php _e('Upload/Add Image', 'il-theme'); ?>',
+                    multiple: false
+                }).open()
+                .on('select', function() {
+                    var uploaded_image = image.state().get('selection').first();
+                    var image_url = uploaded_image.toJSON().url;
+                    $('#category_image').val(image_url);
+                    $('#category_image_preview').html('<img src="' + image_url + '" style="max-width: 100%;" />');
+                });
+            });
+
+            $('#category_image_remove_button').click(function(e) {
+                e.preventDefault();
+                $('#category_image').val('');
+                $('#category_image_preview').html('');
+            });
+        });
+    </script>
+    <?php
+}
+add_action('category_edit_form_fields', 'il_theme_add_category_image_field');
+add_action('category_add_form_fields', 'il_theme_add_category_image_field');
+
+// Save the category image URL
+function il_theme_save_category_image($term_id) {
+    if (isset($_POST['category_image'])) {
+        update_term_meta($term_id, 'category_image', sanitize_text_field($_POST['category_image']));
+    }
+}
+add_action('edited_category', 'il_theme_save_category_image');
+add_action('create_category', 'il_theme_save_category_image');
