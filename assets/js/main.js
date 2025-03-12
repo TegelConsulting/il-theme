@@ -41,10 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const loadMoreTrigger = document.getElementById("load-more-trigger");
 
+  let fetching = false;
+
   const loadObserver = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
-        loadMorePosts();
+        if (!fetching) {
+          fetching = true;
+          loadMorePosts();
+        }
       }
     },
     {
@@ -108,6 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .getAttribute("datetime");
           loadObserver.observe(loadMoreTrigger);
         }
+
+        fetching = false;
       });
   }
 });
