@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (loadMoreTrigger) loadObserver.observe(loadMoreTrigger);
 
   function loadMorePosts() {
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
+
     let lastPostDate = document
       .querySelector(".wp-block-post:last-child .date time")
       .getAttribute("datetime");
@@ -88,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .toISOString()
             .slice(0, 19)
             .replace("T", " ");
-          const displayDate = new Intl.DateTimeFormat("en-US", {
+          const displayDate = new Intl.DateTimeFormat("sv-SE", {
             year: "numeric",
             month: "long",
             day: "numeric",
@@ -114,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
           loadObserver.observe(loadMoreTrigger);
         }
 
+        loader.style.display = "none";
         fetching = false;
       });
   }
