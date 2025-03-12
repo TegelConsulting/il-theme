@@ -191,6 +191,10 @@ function il_theme_register_custom_blocks() {
     register_block_type(__DIR__ . '/blocks/highlights', array(
         'render_callback' => 'il_theme_render_highlights_block',
     ));
+
+    register_block_type(__DIR__ . '/blocks/herovideo', array(
+        'render_callback' => 'il_theme_render_hero_video_block',
+    ));
 }
 add_action('init', 'il_theme_register_custom_blocks');
 
@@ -397,6 +401,20 @@ function il_theme_render_highlights_block($attributes) {
     } else {
         echo '<div>No posts found</div>';
     }
+    return ob_get_clean();
+}
+
+function il_theme_render_hero_video_block($attributes) {
+    ob_start();
+    ?>
+    
+            <div class="video box">
+                <video autoplay loop muted>
+                    <source src="http://localhost/wordpress/wp-content/uploads/2025/03/IMG_6475.mov" type="video/mp4">
+                </video>
+            </div>
+        
+    <?php
     return ob_get_clean();
 }
 

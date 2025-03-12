@@ -1,0 +1,11 @@
+{
+  "apiVersion": 2,
+  "name": "il-theme/herovideo",
+  "title": "Hero Video",
+  "category": "design",
+  "icon": "cover-image",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js"
+}

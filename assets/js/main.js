@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   );
 
-  loadObserver.observe(loadMoreTrigger);
+  if (loadMoreTrigger) loadObserver.observe(loadMoreTrigger);
 
   function loadMorePosts() {
     let lastPostDate = document
