@@ -1,0 +1,45 @@
+<div class="content">
+  <!-- wp:template-part {"slug":"header","tagName":"header","id":"header","className":"transparent-header"} /-->
+
+  <div class="box top-margin">
+    <!-- wp:group {"tagName":"div","className":"category-posts","layout":{"type":"default"}} -->
+    <div class="wp-block-group category-posts" id="posts">
+      <!-- wp:html -->
+      <div id="category-slug" style="display: none">[category_slug]</div>
+      <!-- /wp:html -->
+
+      <!-- wp:query {"queryId":1,"query":{"perPage":5,"pages":1,"offset":0,"postType":"post","order":"desc","orderBy":"date"},"displayLayout":{"type":"list","columns":3},"className":"category-posts-query"} -->
+      <div class="wp-block-query category-posts-query">
+        <div class="wp-block-post-template">
+          <article class="wp-block-post post">
+            <section class="post__header">
+              <!-- wp:post-title {"isLink":true, "className": "post__title"} /-->
+              <!-- wp:post-date { "className": "date" } /-->
+            </section>
+            <!-- wp:post-excerpt /-->
+          </article>
+        </div>
+      </div>
+      <!-- /wp:query -->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:html -->
+    <div id="load-more-trigger"></div>
+    <!-- /wp:html -->
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const categorySlugElement = document.getElementById("category-slug");
+    const categorySlug = categorySlugElement.textContent.trim();
+    const queryBlock = document.querySelector(".wp-block-query");
+
+    if (categorySlug) {
+      const query = JSON.parse(queryBlock.getAttribute("data-query"));
+      query.categoryIds = [categorySlug];
+      queryBlock.setAttribute("data-query", JSON.stringify(query));
+    }
+  });
+</script>

@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadObserver = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
-        console.log("Get more posts");
-
         loadMorePosts();
       }
     },
@@ -64,7 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadObserver.unobserve(loadMoreTrigger);
 
-    fetch(`/wordpress/wp-json/il-theme/v1/load-more-posts?date=${lastPostDate}`)
+    let catQuery = "";
+    if (typeof ilThemeData !== "undefined" && ilThemeData.categoryId) {
+      catQuery = `category_id=${ilThemeData.categoryId}`;
+    }
+
+    fetch(
+      `/wordpress/wp-json/il-theme/v1/load-more-posts?date=${lastPostDate}&${catQuery}`,
+    )
       .then((response) => response.json())
       .then((data) => {
         const postList = document.getElementById("posts");
