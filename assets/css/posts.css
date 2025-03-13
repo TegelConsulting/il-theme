@@ -97,3 +97,9 @@
     font-size: 2.5rem;
   }
 }
+
+.wp-block-query-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
