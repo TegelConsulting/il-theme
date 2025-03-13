@@ -1,142 +1,151 @@
 .carousel {
-    width: 100%;
-    height: 100dvh;
-    /* overflow-x: hidden; */
-    z-index: 1;
+  width: 100%;
+  height: 100dvh;
+  /* overflow-x: hidden; */
+  z-index: 1;
 
-    /* & .owl-stage-outer {
+  /* & .owl-stage-outer {
         z-index: 2;
     } */
 }
 
 .carousel-item {
-    width: 100%;
-    display: grid;
-    place-items: center;
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .carousel-content {
-    width: 100%;
-    height: 100vh;
-    text-align: center;
-    position: relative; /* Ensure positioning context for child elements */
-    z-index: 1; /* Ensure the content is above the navigation buttons */
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  position: relative; /* Ensure positioning context for child elements */
+  z-index: 1; /* Ensure the content is above the navigation buttons */
 }
 
 .carousel-content h3 {
-    margin: 0;
-    font-size: 2.5rem;
-    width: 75%;
-
-    @media screen and (min-width: 768px) {
-        width: 90%;
-    }
+  margin: 0;
+  font-size: 2.5rem;
 }
 
 .carousel-content a {
-    text-decoration: none;
-    color: inherit;
-    mix-blend-mode: difference;
-    color: white;
+  text-decoration: none;
+  color: inherit;
+  mix-blend-mode: difference;
+  color: white;
 }
 
 .carousel-image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    display: grid;
-    place-items: center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+
+  section {
+    width: 75%;
+    color: #fff;
+
+    time,
+    p {
+      opacity: 0.8;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 90%;
+    }
+  }
 }
 
 .owl-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Ensure the buttons are above the content */
-    pointer-events: none; /* Allow clicks to pass through */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Ensure the buttons are above the content */
+  pointer-events: none; /* Allow clicks to pass through */
 
-    display: grid;
-    align-items: center;
+  display: grid;
+  align-items: center;
 }
 
 .owl-nav .nav-btn {
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-    pointer-events: auto; /* Make the buttons clickable */
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  pointer-events: auto; /* Make the buttons clickable */
 }
 
 .owl-prev,
 .owl-next {
-    position: absolute;
-    transition: all 0.2s;
+  position: absolute;
+  transition: all 0.2s;
 
-    @media screen and (min-width: 768px) {
-        opacity: 0;
-    }
+  @media screen and (min-width: 768px) {
+    opacity: 0;
+  }
 }
 
 .owl-prev {
-    transform: rotate(-90deg);
-    left: -15px;
+  transform: rotate(-90deg);
+  left: -15px;
 
-    @media screen and (min-width: 768px) {
-        left: -30px;
-        transform: rotate(-90deg);
-    }
+  @media screen and (min-width: 768px) {
+    left: -30px;
+    transform: rotate(-90deg);
+  }
 }
 
 .owl-next {
-    right: 10px;
-    transform: rotate(90deg);
+  right: 10px;
+  transform: rotate(90deg);
 
-    @media screen and (min-width: 768px) {
-        right: 0;
-        transform: rotate(90deg);
-    }
+  @media screen and (min-width: 768px) {
+    right: 0;
+    transform: rotate(90deg);
+  }
 }
 
 .owl-prev.show {
-    @media screen and (min-width: 768px) {
-        opacity: 1;
-        left: -15px;
-    }
+  @media screen and (min-width: 768px) {
+    opacity: 1;
+    left: -15px;
+  }
 }
 
 .owl-next.show {
-    @media screen and (min-width: 768px) {
-        opacity: 1;
-        right: 10px;
-    }
+  @media screen and (min-width: 768px) {
+    opacity: 1;
+    right: 10px;
+  }
 }
 
 .owl-nav .prev-slide {
-    position: relative;
+  position: relative;
 }
 
 #carousel .owl-dots {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex; /* Ensure the dots are displayed in a row */
-    justify-content: center;
-    gap: 13px; /* Add some space between the dots */
-    z-index: 2; /* Ensure the dots are above the content */
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex; /* Ensure the dots are displayed in a row */
+  justify-content: center;
+  gap: 13px; /* Add some space between the dots */
+  z-index: 2; /* Ensure the dots are above the content */
 
-    & .owl-dot {
-        width: 7px;
-        height: 7px;
-        background: grey;
-        border-radius: 50%;
-        cursor: pointer;
-    }
+  & .owl-dot {
+    width: 7px;
+    height: 7px;
+    background: grey;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 
-    & .owl-dot.active {
-        background: black;
-    }
+  & .owl-dot.active {
+    background: black;
+  }
 }

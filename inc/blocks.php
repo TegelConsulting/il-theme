@@ -86,12 +86,26 @@ function il_theme_render_carousel_block($attributes) {
             $coverImageUrl = get_post_meta($post_id, '_il_theme_coverimage', true);
             $post_title = get_the_title();
             $post_link = get_permalink();
+            $post_date = get_the_date();
+            $categories = get_the_category();
+            $category_list = '';
+
+            if (!empty($categories)) {
+                foreach ($categories as $category) {
+                    $category_list .= '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>, ';
+                }
+                $category_list = rtrim($category_list, ', ');
+            }
 
             echo '<div class="carousel-item item">';
             if ($coverImageUrl) {
                 echo '<div class="carousel-content">
-                    <div class="carousel-image" style="background-image: url(' . esc_url($coverImageUrl) . ');">    
-                        <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                    <div class="carousel-image" style="background-image: url(' . esc_url($coverImageUrl) . ');">
+                        <section>
+                            <time>' . $post_date . '</time>
+                            <h3><a href="' . esc_url($post_link) . '">' . esc_html($post_title) . '</a></h3>
+                            <p>' . $category_list . '</p>
+                        </section>
                     </div>
                 </div>';
             }
