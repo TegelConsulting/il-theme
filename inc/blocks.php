@@ -193,3 +193,16 @@ function il_theme_render_categories_block($attributes) {
     }
     return ob_get_clean();
 }
+
+function il_theme_register_block_patterns() {
+    register_block_pattern(
+        'iltheme/previous-posts',
+        array(
+            'title'       => __('Previous posts', 'iltheme'),
+            'description' => _x('A heading for previous posts', 'Block pattern description', 'il-theme'),
+            'content'     => '<!-- wp:heading {"level":3} --><h3>' . esc_html__('Previous posts', 'iltheme') . '</h3><!-- /wp:heading -->',
+            'categories'  => array('text'),
+        )
+    );
+}
+add_action('init', 'il_theme_register_block_patterns');

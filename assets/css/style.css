@@ -1,108 +1,112 @@
 body {
-    min-height: 100dvh;
-    margin: 0;
-    padding: 0;
-    font-family: "Libre Caslon Text", Arial, Helvetica, sans-serif;
-    scroll-behavior: smooth;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  font-family: "Libre Caslon Text", Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .hero {
-    min-height: 100dvh;
-    background-size: cover;
-    background-position: center;
+  min-height: 100dvh;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+
+  p {
     display: grid;
     place-items: center;
-
-    p {
-        display: grid;
-        place-items: center;
-        font-size: 1.5rem;
-    }
+    font-size: 1.5rem;
+  }
 }
 
 .no-padding {
-    padding: 0;
-    width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
 .content {
-    width: 100%;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .box {
-    flex: 1;
-    display: grid;
-    place-items: center;
+  flex: 1;
+  display: grid;
+  place-items: center;
 
-    .post {
-        opacity: 0;
-        transform: translateX(-40px);
-        transition: all 0.5s ease;
-    }
+  .post {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: all 0.5s ease;
+  }
 }
 
 .no-fade {
-    opacity: 1;
+  opacity: 1;
 
-    .post {
-        opacity: 1;
-        transform: none;
-    }
+  .post {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .top-margin {
-    margin-top: 150px;
+  margin-top: 150px;
 }
 
 .container {
-    padding: 20px;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .loader {
-    width: 35px;
-    height: 35px;
-    border: 5px solid #000;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    position: relative;
-    animation: pulse 1s linear infinite;
+  width: 35px;
+  height: 35px;
+  border: 5px solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  animation: pulse 1s linear infinite;
 }
 .loader:after {
-    content: "";
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    border: 5px solid #000;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    animation: scaleUp 1s linear infinite;
+  content: "";
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border: 5px solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: scaleUp 1s linear infinite;
 }
 
 @keyframes scaleUp {
-    0% {
-        transform: translate(-50%, -50%) scale(0);
-    }
-    60%,
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 @keyframes pulse {
-    0%,
-    60%,
-    100% {
-        transform: scale(1);
-    }
-    80% {
-        transform: scale(1.2);
-    }
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.2);
+  }
 }

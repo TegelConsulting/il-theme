@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       rootMargin: "0px",
       threshold: 1.0,
-    },
+    }
   );
 
   if (loadMoreTrigger) loadObserver.observe(loadMoreTrigger);
@@ -76,11 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     fetch(
-      `/wordpress/wp-json/iltheme/v1/load-more-posts?date=${lastPostDate}&${catQuery}`,
+      `/wordpress/wp-json/iltheme/v1/load-more-posts?date=${lastPostDate}&${catQuery}`
     )
       .then((response) => response.json())
       .then((data) => {
-        const postList = document.getElementById("posts");
+        const postList = document.getElementById("previous");
         data.posts.forEach((post) => {
           const article = document.createElement("article");
           article.id = `post-${post.id}`;

@@ -26,9 +26,9 @@
 				<!-- wp:comment-author-name /-->
 				<!-- wp:comment-content /-->
 				<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-				<div class="wp-block-group">
+				<div class="wp-block-group wp-block-button">
 					<!-- wp:comment-edit-link /-->
-					<!-- wp:comment-reply-link /-->
+					<!-- wp:comment-reply-link { "className": "wp-block-button__link wp-element-button reply__link" } /-->
 				</div>
 				<!-- /wp:group -->
 			</div>

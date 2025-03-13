@@ -1,9 +1,9 @@
 <div class="content">
   <!-- wp:template-part {"slug":"header","tagName":"header","id":"header","className":"transparent-header"} /-->
 
-  <div class="box top-margin">
+  <div class="box top-margin posts">
     <!-- wp:group {"tagName":"div","className":"category-posts","layout":{"type":"default"}} -->
-    <div class="wp-block-group category-posts" id="posts">
+    <div class="wp-block-group category-posts full-width" id="posts">
       <!-- wp:html -->
       <div id="category-slug" style="display: none">[category_slug]</div>
       <!-- /wp:html -->
@@ -23,13 +23,16 @@
       <!-- /wp:query -->
     </div>
     <!-- /wp:group -->
-
-    <!-- wp:html -->
-
-    <div id="loader" class="loader" style="display: none"></div>
-    <div id="load-more-trigger"></div>
-    <!-- /wp:html -->
   </div>
+
+  <!-- wp:html -->
+  <div class="top-margin posts">
+    <!-- wp:pattern {"slug":"iltheme/previous-posts"} /-->
+    <div id="previous" class="box no-fade"></div>
+  </div>
+  <div id="loader" class="loader" style="display: none"></div>
+  <div id="load-more-trigger"></div>
+  <!-- /wp:html -->
 
   <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
 </div>

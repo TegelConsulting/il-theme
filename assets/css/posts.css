@@ -1,10 +1,10 @@
-#posts {
-  width: 75%;
-}
-
 .posts {
-  max-width: 75%;
+  width: 90%;
   padding-top: 10rem;
+
+  @media screen and (min-width: 768px) {
+    width: 75%;
+  }
 }
 
 .post {
@@ -45,14 +45,25 @@
   padding: 20px;
   margin: 10px;
 
+  a {
+    text-decoration: none;
+  }
+
   .comment {
-    a {
-      text-decoration: none;
+    .wp-block-comment-date {
+      a {
+        color: #000;
+      }
     }
 
-    .comment__header {
-      display: flex;
-      justify-content: space-between;
+    .wp-block-comment-author-name {
+      font-size: 1.2rem;
+    }
+
+    .reply__link {
+      a {
+        color: white;
+      }
     }
   }
 }
