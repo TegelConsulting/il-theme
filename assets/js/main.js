@@ -68,6 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
       .querySelector(".wp-block-post:last-child .date time")
       .getAttribute("datetime");
 
+    const lastPreviousPostDateElement = document.querySelector(
+      "#previous .wp-block-post:last-child .date time"
+    );
+
+    if (lastPreviousPostDateElement) {
+      lastPostDate = lastPreviousPostDateElement.getAttribute("datetime");
+    }
+
     loadObserver.unobserve(loadMoreTrigger);
 
     let catQuery = "";
