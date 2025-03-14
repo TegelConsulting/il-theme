@@ -2,7 +2,7 @@
   width: 90%;
   padding-top: 10rem;
 
-  .wp-block-post-template {
+  .wp-block-query {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 

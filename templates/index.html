@@ -8,26 +8,14 @@
   <!-- wp:iltheme/categories /-->
 
   <div class="box posts">
-    <!-- wp:query {"queryId":1,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"list","columns":3}} -->
-    <div class="wp-block-query">
-      <!-- wp:post-template -->
-      <article class="wp-block-post">
-        <section class="post__header">
-          <!-- wp:post-title {"isLink":true, "className": "post__title"} /-->
-          <!-- wp:post-date { "className": "post__date" } /-->
-        </section>
-        <!-- wp:post-content { "className": "post__text" } /-->
-      </article>
-      <!-- /wp:post-template -->
-      <!-- wp:query-pagination -->
-      <div class="wp-block-query-pagination">
-        <!-- wp:query-pagination-previous /-->
-        <!-- wp:query-pagination-numbers /-->
-        <!-- wp:query-pagination-next /-->
+    <div class="box posts">
+      <div class="wp-block-query">
+        <!-- Posts will be loaded here by JavaScript -->
       </div>
-      <!-- /wp:query-pagination -->
+      <div class="wp-block-query-pagination">
+        <!-- Pagination links will be loaded here by JavaScript -->
+      </div>
     </div>
-    <!-- /wp:query -->
   </div>
 
   <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
