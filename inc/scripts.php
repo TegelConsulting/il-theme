@@ -20,6 +20,11 @@ add_action('wp_enqueue_scripts', 'il_theme_enqueue_styles');
 
 function il_theme_enqueue_scripts() {
     wp_enqueue_script('iltheme-main-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true);
+
+    // Conditionally enqueue the script for the index template
+    if (is_home() || is_front_page()) {
+        wp_enqueue_script('il-theme-index-scripts', get_template_directory_uri() . '/assets/js/index.js', array('jquery'), null, true);
+    }
 }
 add_action('wp_enqueue_scripts', 'il_theme_enqueue_scripts');
 
