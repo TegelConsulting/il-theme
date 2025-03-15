@@ -74,3 +74,12 @@ function il_theme_category_slug_shortcode() {
     return '';
 }
 add_shortcode('category_slug', 'il_theme_category_slug_shortcode');
+
+//Include the theme update checker library
+require_once get_template_directory() . '/lib/plugin-update-checker-5.5/plugin-update-checker.php';
+
+// Initialize the theme update checker
+// $theme_update_checker = new ThemeUpdateChecker(
+//     'iltheme',
+//     'https://github.com/TegelConsulting/il-theme/main/theme-update.json'
+// );
