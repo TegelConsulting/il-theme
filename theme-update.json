@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "download_url": "https://github.com/TegelConsulting/il-theme/releases/download/v1.1/iltheme.zip",
+  "download_url": "https://raw.githubusercontent.com/TegelConsulting/il-theme/main/releases/download/v1.1/iltheme.zip",
   "details_url": "https://github.com/TegelConsulting/il-theme",
   "requires": "5.0",
   "tested": "5.8",

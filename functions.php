@@ -7,6 +7,7 @@ require_once get_template_directory() . '/inc/class-walker-nav-menu-spacer.php';
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/rest-api.php';
 
+
 function il_theme_create_about_me_page() {
     // Check if the page already exists
     $page_check = get_page_by_title('Om mig');
@@ -76,10 +77,15 @@ function il_theme_category_slug_shortcode() {
 add_shortcode('category_slug', 'il_theme_category_slug_shortcode');
 
 //Include the theme update checker library
-require_once get_template_directory() . '/lib/plugin-update-checker-5.5/plugin-update-checker.php';
+require get_template_directory() . '/lib/plugin-update-checker-5.5/plugin-update-checker.php';
 
 // Initialize the theme update checker
 // $theme_update_checker = new ThemeUpdateChecker(
 //     'iltheme',
-//     'https://github.com/TegelConsulting/il-theme/main/theme-update.json'
+//     'https://raw.githubusercontent.com/TegelConsulting/il-theme/main/theme-update.json'
 // );
+$theme_update_checker = new YahnisElsts\PluginUpdateChecker\v5p5\Theme\UpdateChecker(
+    'https://raw.githubusercontent.com/TegelConsulting/il-theme/main/theme-update.json',
+    __FILE__,
+    'iltheme'
+);
